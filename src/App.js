@@ -1,25 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import LandingSection from './components/LandingSection';
+import ProjectSection from './components/ProjectSection';
+import AboutAndSkillSection from './components/AboutAndSkillSection';
+
+import './App.css'
+import EndSection from './components/EndSection';
+import EndRibbon from './components/EndRibbon';
 
 function App() {
+  const [screenSize,setScreenSize] = useState(1920)
+  useEffect(() => {
+
+    function handleResizeScreen () {
+      setScreenSize(window.innerWidth)
+    }
+    
+    
+    window.addEventListener('resize',handleResizeScreen)
+
+    return () => {
+      window.removeEventListener('resize',handleResizeScreen)
+    }
+  },[screenSize])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='bg-minimalistic-bg '>
+      <LandingSection/>
+      {screenSize < 1024 ? <AboutAndSkillSection/> : null}
+      <ProjectSection/>
+      <EndSection/>
+      <EndRibbon/>
     </div>
   );
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
